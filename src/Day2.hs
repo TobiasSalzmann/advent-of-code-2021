@@ -31,18 +31,18 @@ solvePart1 :: [Command] -> Pos
 solvePart1 = foldl step1 (Pos{x=0,y=0,aim=0})
 
 step1 :: Pos -> Command -> Pos
-step1 pos (Forward dx) = pos {x=(x pos + dx)}
-step1 pos (Down dy) = pos {y=(y pos + dy)}
-step1 pos (Up dy) = pos {y=(y pos - dy)}
+step1 pos@(Pos {x}) (Forward dx) = pos {x = x + dx}
+step1 pos@(Pos {y}) (Down dy) = pos {y = y + dy}
+step1 pos@(Pos {y}) (Up dy) = pos {y = y - dy}
 
 
 solvePart2 :: [Command] -> Pos
 solvePart2 = foldl step2 (Pos{x=0,y=0,aim=0})
 
 step2 :: Pos -> Command -> Pos
-step2 pos (Forward dx) = pos {x=(x pos + dx), y=(y pos + (aim pos * dx))}
-step2 pos (Down dy) = pos {aim=(aim pos + dy)}
-step2 pos (Up dy) = pos {aim=(aim pos - dy)}
+step2 pos@(Pos {x, y, aim}) (Forward dx) = pos {x = x + dx, y = y + aim * dx}
+step2 pos@(Pos {aim}) (Down dy) = pos {aim = aim + dy}
+step2 pos@(Pos {aim}) (Up dy) = pos {aim = aim - dy}
 
 
 
