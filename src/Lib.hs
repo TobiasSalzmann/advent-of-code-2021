@@ -2,22 +2,23 @@
 {-# LANGUAGE NamedFieldPuns #-}
 module Lib where
 
-import Data.List.Split (splitOn)
 import Data.List (dropWhileEnd)
 import Data.Char
 
 someFunc :: IO ()
 someFunc = putStrLn "someFunc"
-
-parseStrings :: String -> IO [String]
-parseStrings fileName = do
-  raw <- readFile fileName
-  (return . splitOn ", " . dropWhileEnd isSpace) raw
   
 parseIntLines :: String -> IO [Int]
-parseIntLines fileName = do
+parseIntLines = parseLinesWith read
+
+parseWordLists :: String -> IO [[String]]
+parseWordLists = parseLinesWith words
+  
+parseLinesWith :: (String -> a) -> String -> IO [a]
+parseLinesWith f fileName = do
   raw <- readFile fileName
-  (return . map read . lines . dropWhileEnd isSpace) raw
+  let rawLines = (lines . dropWhileEnd isSpace) raw 
+  return (map f rawLines)
   
 succR :: (Eq a, Bounded a , Enum a) => a -> a
 succR x 
