@@ -1,4 +1,5 @@
 {-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE NamedFieldPuns #-}
 module Lib where
 
 import Data.List.Split (splitOn)
@@ -44,4 +45,10 @@ data Config a r1 r2 = Config  { title :: String
                      }  
 
 runConfig :: (Show r1, Show r2) => Config a r1 r2 -> IO ()
-runConfig c = run (title c) (input c) (part1 c) (part2 c)
+runConfig (Config {title, input, part1, part2}) = do
+                                                    parsed <- input
+                                                    putStrLn (title ++ ":")
+                                                    putStrLn ("Part 1:")
+                                                    (putStrLn . show . part1) parsed
+                                                    putStrLn ("Part 2:")
+                                                    (putStrLn . show . part2) parsed
