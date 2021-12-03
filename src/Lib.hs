@@ -2,7 +2,7 @@
 {-# LANGUAGE NamedFieldPuns #-}
 module Lib where
 
-import Data.List (dropWhileEnd)
+import Data.List (dropWhileEnd, foldl')
 import Data.Char
 
 someFunc :: IO ()

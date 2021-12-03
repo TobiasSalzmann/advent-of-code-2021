@@ -32,3 +32,10 @@ packages:
       sha256: 86234e3221f6fa50e82d860a8428005ac3ff19fea92103ff79a3047cd5cd1625
       size: 2823
     hackage: containers-0.6.5.1@sha256:a029734132bb3471f8a91e3deaa095581a97410c405a1c665643053db87d87c1,2596
+- original:
+    hackage: multiset-0.3.4.3
+  completed:
+    pantry-tree:
+      sha256: d00fb169c0b060714fdca909bd526265f288d0748bd10e64fd56c0a8a5db01b6
+      size: 497
+    hackage: multiset-0.3.4.3@sha256:968192524bd38ffa29856e1e3f9f6f8a5704f98899d4b25f8ebd425001594f61,1790
