@@ -3,6 +3,7 @@
 module Lib where
 
 import Data.List (dropWhileEnd, foldl')
+import Data.List.Split (wordsBy)
 import Data.Char
 
 someFunc :: IO ()
@@ -13,6 +14,9 @@ parseIntLines = parseLinesWith read
 
 parseWordLists :: String -> IO [[String]]
 parseWordLists = parseLinesWith words
+
+parseIntListLines :: String -> IO[[Int]]
+parseIntListLines = parseLinesWith (map read . wordsBy (not . isNumber))
   
 parseLinesWith :: (String -> a) -> String -> IO [a]
 parseLinesWith f fileName = do
