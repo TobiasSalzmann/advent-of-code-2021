@@ -24,6 +24,7 @@ dependencies:
 - split
 - text
 - multiset
+- containers
 
 library:
   source-dirs: src

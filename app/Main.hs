@@ -6,6 +6,7 @@ import qualified Day2
 import qualified Day3
 import qualified Day4
 import qualified Day5
+import qualified Day6
 import Lib
 
 main :: IO ()
@@ -19,4 +20,5 @@ runDay 2 = runConfig Day2.config
 runDay 3 = runConfig Day3.config
 runDay 4 = runConfig Day4.config
 runDay 5 = runConfig Day5.config
+runDay 6 = runConfig Day6.config
 
