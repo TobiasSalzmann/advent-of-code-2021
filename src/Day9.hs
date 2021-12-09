@@ -22,7 +22,11 @@ riskLevel m p level
   | otherwise = 0
     
 solvePart2 :: Map.Map Point2D Int -> Int
-solvePart2 = product . take 3 . reverse . sort . map length . group . sort . Map.elems . mergeBasinsToFixedPoint . Map.mapWithKey (curry fst) . Map.filter (/=9)
+solvePart2 m = 
+  let initialBasins = Map.mapWithKey (curry fst) . Map.filter (/=9) $ m
+      finalBasins = mergeBasinsToFixedPoint initialBasins
+      basinSizes = map length . group . sort . Map.elems $ finalBasins
+  in product . take 3 . reverse . sort $ basinSizes
 
 mergeBasinsToFixedPoint :: Map.Map Point2D Point2D -> Map.Map Point2D Point2D
 mergeBasinsToFixedPoint m = 
