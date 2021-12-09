@@ -5,6 +5,8 @@ module Lib where
 import Data.List (dropWhileEnd, foldl')
 import Data.List.Split (wordsBy)
 import Data.Char
+import Data.Maybe(mapMaybe)
+import qualified Data.Map as Map
 
 someFunc :: IO ()
 someFunc = putStrLn "someFunc"
@@ -17,6 +19,16 @@ parseWordLists = parseLinesWith words
 
 parseIntListLines :: String -> IO[[Int]]
 parseIntListLines = parseLinesWith (map read . wordsBy (not . isNumber))
+
+data Point2D = Point2D{xCoord :: Int, yCoord :: Int} deriving (Eq, Ord)
+
+parseMap :: (Char -> a) -> String -> IO (Map.Map Point2D a)
+parseMap f fileName = do 
+  mapLines <- parseLinesWith id fileName
+  return $ Map.fromList [(Point2D{xCoord=x, yCoord=y}, f c) | (y, line) <- [0..] `zip` mapLines, (x, c) <- [0..] `zip` line]
+  
+manhattanNeighbours :: Map.Map Point2D a -> Point2D -> [a]
+manhattanNeighbours m (p@Point2D{xCoord, yCoord}) = mapMaybe id [m Map.!? p {xCoord=xCoord+1}, m Map.!? p {xCoord=xCoord-1}, m Map.!? p {yCoord=yCoord+1}, m Map.!? p {yCoord=yCoord-1}]   
   
 parseLinesWith :: (String -> a) -> String -> IO [a]
 parseLinesWith f fileName = do
