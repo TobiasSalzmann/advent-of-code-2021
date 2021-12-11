@@ -5,7 +5,6 @@ module Day11
   ) where
 
 import           Data.Char (digitToInt)
-import           Data.List
 import qualified Data.Map  as Map
 import           Lib
 
