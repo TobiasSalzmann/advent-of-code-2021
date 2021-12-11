@@ -8,6 +8,7 @@ import           Data.List       (dropWhileEnd, foldl')
 import           Data.List.Split (wordsBy)
 import qualified Data.Map        as Map
 import           Data.Maybe      (mapMaybe)
+import qualified Data.Set        as Set
 
 someFunc :: IO ()
 someFunc = putStrLn "someFunc"
@@ -47,6 +48,17 @@ manhattanNeighbours m (p@Point2D {xCoord, yCoord}) =
     , m Map.!? p {yCoord = yCoord + 1}
     , m Map.!? p {yCoord = yCoord - 1}
     ]
+
+neighbours :: Point2D -> [Point2D]
+neighbours (Point2D {xCoord, yCoord}) =
+  [ Point2D {xCoord = xCoord + x, yCoord = yCoord + y}
+  | x <- [-1 .. 1]
+  , y <- [-1 .. 1]
+  , (x, y) /= (0, 0)
+  ]
+
+neighbourValues :: Map.Map Point2D a -> Point2D -> [a]
+neighbourValues m = Map.elems . Map.restrictKeys m . Set.fromList . neighbours
 
 parseLinesWith :: (String -> a) -> String -> IO [a]
 parseLinesWith f fileName = do
