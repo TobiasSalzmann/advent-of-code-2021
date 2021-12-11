@@ -35,9 +35,12 @@ executeFlashes flashed m =
         then (flashed, m)
         else let pointsAboutToFlash = Map.keys toFlash
                  pointsToIncrement = concatMap neighbours pointsAboutToFlash
-                 increases = Map.fromListWith (+) (pointsToIncrement `zip` [1,1..])
-                 newM = Map.unionWith (+) rest increases
-              in executeFlashes (flashed ++ pointsAboutToFlash) newM
+                 updated =
+                   foldl
+                     (\acc p -> Map.update (Just . (+ 1)) p acc)
+                     rest
+                     pointsToIncrement
+              in executeFlashes (flashed ++ pointsAboutToFlash) updated
 
 executeRound :: Map.Map Point2D Int -> (Int, Map.Map Point2D Int)
 executeRound m =
