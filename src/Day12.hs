@@ -32,10 +32,13 @@ parseEdge s =
 
 type Graph = Map.Map Node [Node]
 
-data ShipState = ShipState {visited :: Set.Set Node
-,allowDoubleVisit :: Bool
-,cave :: Node
-}
+data ShipState =
+  ShipState
+    { visited          :: Set.Set Node
+    , allowDoubleVisit :: Bool
+    , cave             :: Node
+    }
+  deriving (Eq, Ord)
 
 parseGraph :: [Edge] -> Graph
 parseGraph = Map.fromListWith (++) . concatMap (\(a, b) -> [(a, [b]), (b, [a])])
@@ -43,18 +46,23 @@ parseGraph = Map.fromListWith (++) . concatMap (\(a, b) -> [(a, [b]), (b, [a])])
 solvePart :: Bool -> [Edge] -> Int
 solvePart allowDoubleVisit e =
   Dag.countPaths
-    (\(_, _, n) -> n == "end")
+    ((== "end") . cave)
     (validNext' (parseGraph e))
-    (Set.empty, allowDoubleVisit, "start")
+    ShipState {visited = Set.empty, allowDoubleVisit, cave = "start"}
 
 isSmallCave :: Node -> Bool
 isSmallCave = all isLower
 
-validNext' ::
-     Graph -> (Set.Set Node, Bool, Node) -> [(Set.Set Node, Bool, Node)]
-validNext' graph (visited, canVisitTwice, node)
-  | node `elem` visited && isSmallCave node && node /= "start" && canVisitTwice =
-    [(Set.insert node visited, False, n) | n <- graph ! node]
-  | node `elem` visited && isSmallCave node = []
-  | otherwise =
-    [(Set.insert node visited, canVisitTwice, n) | n <- graph ! node]
+validNext' :: Graph -> ShipState -> [ShipState]
+validNext' graph (s@ShipState {visited, allowDoubleVisit, cave})
+  | cave `elem` visited &&
+      isSmallCave cave && cave /= "start" && allowDoubleVisit =
+    next graph (s {allowDoubleVisit = False})
+  | cave `elem` visited && isSmallCave cave = []
+  | otherwise = next graph s
+
+next :: Graph -> ShipState -> [ShipState]
+next graph (ShipState {visited, allowDoubleVisit, cave}) =
+  [ ShipState {visited = Set.insert cave visited, allowDoubleVisit, cave = n}
+  | n <- graph ! cave
+  ]
