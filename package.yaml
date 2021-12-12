@@ -25,6 +25,7 @@ dependencies:
 - text
 - multiset
 - containers
+- criterion
 
 library:
   source-dirs: src

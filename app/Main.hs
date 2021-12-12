@@ -14,13 +14,18 @@ import qualified Day8
 import qualified Day9
 import           Lib
 import           System.Environment
+import Criterion.Main
 
 main :: IO ()
 main = do
   args <- getArgs
-  (runDay . read . head) args
+  if (head args == "bench") then withArgs (drop 1 args) runBench else (runDay . read . head) args
+
+runBench :: IO ()
+runBench = defaultMain [bench ("Day" ++ show d) (nfIO (runDay d)) | d <- [1..12]]
 
 runDay :: Int -> IO ()
+runDay 0 = fmap (const ()) . sequence . map runDay $ [1..12]
 runDay 1  = runConfig Day1.config
 runDay 2  = runConfig Day2.config
 runDay 3  = runConfig Day3.config

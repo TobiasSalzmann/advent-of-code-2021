@@ -45,6 +45,7 @@ library
   build-depends:
       base >=4.7 && <5
     , containers
+    , criterion
     , multiset
     , split
     , text
@@ -61,6 +62,7 @@ executable advent-of-code-haskell-exe
       advent-of-code-haskell
     , base >=4.7 && <5
     , containers
+    , criterion
     , multiset
     , split
     , text
@@ -78,6 +80,7 @@ test-suite advent-of-code-haskell-test
       advent-of-code-haskell
     , base >=4.7 && <5
     , containers
+    , criterion
     , multiset
     , split
     , text

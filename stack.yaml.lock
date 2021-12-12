@@ -39,3 +39,10 @@ packages:
       sha256: d00fb169c0b060714fdca909bd526265f288d0748bd10e64fd56c0a8a5db01b6
       size: 497
     hackage: multiset-0.3.4.3@sha256:968192524bd38ffa29856e1e3f9f6f8a5704f98899d4b25f8ebd425001594f61,1790
+- original:
+    hackage: criterion-1.5.12.0
+  completed:
+    pantry-tree:
+      sha256: 92034e3e490c5fe0eab10277f6e35534b37dc0962347025630380c7d37d99ca1
+      size: 2323
+    hackage: criterion-1.5.12.0@sha256:f9c8c0cff7d6796702849258b22df103cde5baa5ee1f085b6b59f37074ec303f,5273
