@@ -3,6 +3,7 @@ module Main where
 import qualified Day1
 import qualified Day10
 import qualified Day11
+import qualified Day12
 import qualified Day2
 import qualified Day3
 import qualified Day4
@@ -31,3 +32,4 @@ runDay 8  = runConfig Day8.config
 runDay 9  = runConfig Day9.config
 runDay 10 = runConfig Day10.config
 runDay 11 = runConfig Day11.config
+runDay 12 = runConfig Day12.config
