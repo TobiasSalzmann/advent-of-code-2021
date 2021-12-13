@@ -46,3 +46,10 @@ packages:
       sha256: 92034e3e490c5fe0eab10277f6e35534b37dc0962347025630380c7d37d99ca1
       size: 2323
     hackage: criterion-1.5.12.0@sha256:f9c8c0cff7d6796702849258b22df103cde5baa5ee1f085b6b59f37074ec303f,5273
+- original:
+    hackage: advent-of-code-ocr-0.1.2.0
+  completed:
+    pantry-tree:
+      sha256: 40abbd30800075fd8f38404b7950908f13f9425c071a96e2088ade46061a357c
+      size: 614
+    hackage: advent-of-code-ocr-0.1.2.0@sha256:86d2d6ea54072283dfb11ee0d1cc69db36da17578d85bc23d5a6cf8f57328256,2927

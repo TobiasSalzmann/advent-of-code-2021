@@ -26,6 +26,7 @@ dependencies:
 - multiset
 - containers
 - criterion
+- advent-of-code-ocr
 
 library:
   source-dirs: src

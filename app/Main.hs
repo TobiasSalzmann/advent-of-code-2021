@@ -5,6 +5,7 @@ import qualified Day1
 import qualified Day10
 import qualified Day11
 import qualified Day12
+import qualified Day13
 import qualified Day2
 import qualified Day3
 import qualified Day4
@@ -25,10 +26,10 @@ main = do
 
 runBench :: IO ()
 runBench =
-  defaultMain [bench ("Day" ++ show d) (nfIO (runDay d)) | d <- [1 .. 12]]
+  defaultMain [bench ("Day" ++ show d) (nfIO (runDay d)) | d <- [1 .. 13]]
 
 runDay :: Int -> IO ()
-runDay 0  = fmap (const ()) . sequence . map runDay $ [1 .. 12]
+runDay 0  = fmap (const ()) . sequence . map runDay $ [1 .. 13]
 runDay 1  = runConfig Day1.config
 runDay 2  = runConfig Day2.config
 runDay 3  = runConfig Day3.config
@@ -41,3 +42,4 @@ runDay 9  = runConfig Day9.config
 runDay 10 = runConfig Day10.config
 runDay 11 = runConfig Day11.config
 runDay 12 = runConfig Day12.config
+runDay 13 = runConfig Day13.config
